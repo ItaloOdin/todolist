@@ -1,5 +1,5 @@
 .header{
-    background-color: green;
+    background-color: gray;
     color: white;
 }
 .container{
@@ -10,7 +10,7 @@
     div:first-child{
         display: flex;
         justify-content: space-between;
-        align-items: center;        
+        align-items: center;         
     }
     div:last-child{
         display: flex;
