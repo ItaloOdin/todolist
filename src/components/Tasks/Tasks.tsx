@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import styles from "./styles.module.scss"
 
 
@@ -23,14 +23,21 @@ export const Tasks: React.FC = ()=>{
             alert('não é possivel adicionar tarefa com menos de 4 letras')
             return
         }
-
-        setTasks([...tasks,
+        const taskAtualize = [...tasks,
             {id: new Date().getTime(), title:taskTitle, done:false}
-        ])
+        ]
+        setTasks(taskAtualize)
+        localStorage.setItem('tasks',JSON.stringify(taskAtualize))
         setTasktitle('')
     }
-   
-    
+
+    useEffect(()=>{
+        const taskOnLocal = localStorage.getItem('tasks')
+        if(taskOnLocal){
+           setTasks (JSON.parse(taskOnLocal))
+        }
+    }, [] )
+
 return(
 
     <section className={styles.container}>
@@ -51,6 +58,10 @@ return(
                         <li key={String(task.id)}>
                         <input type="checkbox"id={`task-${task.id}`} />
                         <label htmlFor={`task-${task.id}`}> {task.title}</label>
+                        <button onClick={()=>{
+                            
+                            
+                        }}>Concluida</button>
                     </li>    
                     )
                 })}
